@@ -1,8 +1,8 @@
 var VNode = require("virtual-dom/vtree/vnode")
   , VText = require("virtual-dom/vtree/vtext")
 
-exports.virtualize =
-exports.createVTree = createVNode
+exports.virtualize = createVNode
+
 function createVNode(domNode, key) {
   key = key || null // XXX: Leave out `key` for now... merely used for (re-)ordering
 
@@ -38,16 +38,32 @@ function getElementProperties(el) {
   props.forEach(function(propName) {
     if(!el[propName]) return
 
-    if("stlye" == propName) {
+    // Special case: style
+    // .style is a DOMStyleDeclaration, thus we need to iterate over all
+    // rules to create a hash of applied css properties.
+    //
+    // You can directly set a specific .style[prop] = value so patching with vdom
+    // is possible.
+    if("style" == propName) {
       var css = {}
+        , styleProp
       for(var i=0; i<el.style; i++) {
-        css[el.style[i]] = el.style.getPropertyValue(el.style[i]) // XXX: add support for "!important" via getPropertyPriority()!
+        styleProp = el.style[i]
+        css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
       }
 
       obj[propName] = css
       return
     }
 
+    // Special case: dataset
+    // we can iterate over .dataset with a simple for..in loop.
+    // The all-time foo with data-* attribs is the dash-snake to camelCase
+    // conversion.
+    // However, I'm not sure if this is compatible with h()
+    //
+    // .dataset properties are directly accessible as transparent getters/setters, so
+    // patching with vdom is possible.
     if("dataset" == propName) {
       var data = {}
       for(var p in el.dataset) {
@@ -58,6 +74,7 @@ function getElementProperties(el) {
       return
     }
 
+    // default: just copy the property
     obj[propName] = el[propName]
     return
   })
