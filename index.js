@@ -6,10 +6,8 @@ exports.virtualize = createVNode
 function createVNode(domNode, key) {
   key = key || null // XXX: Leave out `key` for now... merely used for (re-)ordering
 
-
   if(domNode.nodeType == 1) return createFromElement(domNode, key)
   if(domNode.nodeType == 3) return createFromTextNode(domNode, key)
-
   return
 }
 
