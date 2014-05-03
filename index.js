@@ -24,7 +24,7 @@
 var VNode = require("virtual-dom/vtree/vnode")
   , VText = require("virtual-dom/vtree/vtext")
 
-exports.virtualize = createVNode
+module.exports = createVNode
 
 function createVNode(domNode, key) {
   key = key || null // XXX: Leave out `key` for now... merely used for (re-)ordering
@@ -35,7 +35,7 @@ function createVNode(domNode, key) {
 }
 
 function createFromTextNode(tNode) {
-  return new VText(tNode.toString()) // XXX: I'm not sure if toString exists here.
+  return new VText(tNode.nodeValue)
 }
 
 
@@ -45,8 +45,8 @@ function createFromElement(el) {
   , properties = getElementProperties(el)
   , children = []
 
-  for (var i = 0; i < el.chilNodes.length; i++) {
-    children.push(createVNode(el.chilNodes[i]/*, i*/))
+  for (var i = 0; i < el.childNodes.length; i++) {
+    children.push(createVNode(el.childNodes[i]/*, i*/))
   }
 
   return new VNode(tagName, properties, children, null, namespace)
@@ -99,6 +99,8 @@ function getElementProperties(el) {
     obj[propName] = el[propName]
     return
   })
+
+  return obj
 }
 
 /**
