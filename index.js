@@ -41,7 +41,7 @@ function createFromTextNode(tNode) {
 
 function createFromElement(el) {
   var tagName = el.tagName
-  , namespace = el.namespaceURI
+  , namespace = el.namespaceURI == 'http://www.w3.org/1999/xhtml'? null : el.namespaceURI
   , properties = getElementProperties(el)
   , children = []
 
