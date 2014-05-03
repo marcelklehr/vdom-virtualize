@@ -107,6 +107,9 @@ function getElementProperties(el) {
  * DOMNode property white list
  */
 var props =
+
+// Some of these cannot be set as direct properties of the DOMnode
+// see https://github.com/Raynos/react/blob/dom-property-config/src/browser/ui/dom/DefaultDOMPropertyConfig.js
 exports.properties = [
 , "accept"
 , "accessKey"
