@@ -21,8 +21,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-var VNode = require("virtual-dom/vtree/vnode")
-  , VText = require("virtual-dom/vtree/vtext")
+var VNode = require("vtree/vnode")
+  , VText = require("vtree/vtext")
 
 module.exports = createVNode
 
