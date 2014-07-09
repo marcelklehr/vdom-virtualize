@@ -7,4 +7,9 @@
 
  * returns `{VNode}`: A virtual-dom tree
 
+### virtualize.fromHTML(html:String)
+ * html `{String}`
+
+ * returns `{VNode}`: A virtual-dom tree
+
 Turn a DOMNode into a [virtual-dom](https://github.com/Matt-Esch/virtual-dom) node.
