@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "Virtulize any DOM node and turn it into a virtual-dom node.",
   "main": "index.js",
-  "peerDependencies": {
-    "vtree": "0.0.4"
+  "dependencies": {
+    "vtree": "0.0.14"
   },
   "devDependencies": {
-    "vtree": "0.0.4"
+    "vtree": "0.0.14"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
