@@ -140,6 +140,7 @@ module.exports.properties = [
 ,"controls"
 ,"crossOrigin"
 ,"data"
+,"dataset"
 ,"defer"
 ,"dir"
 ,"download"
