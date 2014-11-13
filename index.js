@@ -64,7 +64,8 @@ function getElementProperties(el) {
   var obj = {}
 
   props.forEach(function(propName) {
-    if(!el[propName]) return
+    if(el[propName] === void 0 || el[propName] === null) return
+    if(propName === 'tabIndex' && el[propName] === -1) return
 
     // Special case: style
     // .style is a DOMStyleDeclaration, thus we need to iterate over all
@@ -75,7 +76,7 @@ function getElementProperties(el) {
     if("style" == propName) {
       var css = {}
         , styleProp
-      for(var i=0; i<el.style.length; i++) {
+      for(var i=0; i<el.style; i++) {
         styleProp = el.style[i]
         css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
       }
