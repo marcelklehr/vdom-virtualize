@@ -97,17 +97,24 @@ function getElementProperties(el) {
       for(var p in el.dataset) {
         data[p] = el.dataset[p]
       }
-
       obj[propName] = data
       return
     }
-    
+
     // Special case: attributes
-    // some properties are only accessible via .attributes, so 
-    // that's what we'd do, if vdom-create-element could handle this.
-    if("attributes" == propName) return
+    // these are a NamedNodeMap, but we can just convert them to a hash for vdom.
+    if("attributes" == propName){
+      var atts = Array.prototype.slice.call(el[propName]);
+      var hash = atts.reduce(function(o,a){
+        var name = a.name;
+        if(obj[name]) return o;
+        o[name] = el.getAttribute(a.name);
+        return o;
+      },{});
+      return obj[propName] = hash;
+    }
     if("tabIndex" == propName && el.tabIndex === -1) return
-    
+
 
     // default: just copy the property
     obj[propName] = el[propName]
