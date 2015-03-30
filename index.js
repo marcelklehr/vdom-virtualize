@@ -21,8 +21,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-var VNode = require("vtree/vnode")
-  , VText = require("vtree/vtext")
+var VNode = require("virtual-dom/vnode/vnode")
+  , VText = require("virtual-dom/vnode/vtext")
 
 module.exports = createVNode
 
@@ -101,13 +101,13 @@ function getElementProperties(el) {
       obj[propName] = data
       return
     }
-    
+
     // Special case: attributes
-    // some properties are only accessible via .attributes, so 
+    // some properties are only accessible via .attributes, so
     // that's what we'd do, if vdom-create-element could handle this.
     if("attributes" == propName) return
     if("tabIndex" == propName && el.tabIndex === -1) return
-    
+
 
     // default: just copy the property
     obj[propName] = el[propName]
