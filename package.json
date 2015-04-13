@@ -1,6 +1,6 @@
 {
   "name": "vdom-virtualize",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Virtulize any DOM node and turn it into a virtual-dom node.",
   "main": "index.js",
   "dependencies": {
