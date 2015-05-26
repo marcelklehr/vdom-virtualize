@@ -109,6 +109,11 @@ function getElementProperties(el) {
     if("attributes" == propName) return
     if("tabIndex" == propName && el.tabIndex === -1) return
 
+    // Special case: contentEditable
+    // browser use 'inherit' by default on all nodes, but does not allow setting it to ''
+    // diffing virtualize dom will trigger error
+    // ref: https://github.com/Matt-Esch/virtual-dom/issues/176
+    if("contentEditable" == propName && el[propName] === 'inherit') return
 
     // default: just copy the property
     obj[propName] = el[propName]
