@@ -64,7 +64,8 @@ function getElementProperties(el) {
   var obj = {}
 
   props.forEach(function(propName) {
-    if(!el[propName]) return
+    if(el[propName] === void 0 || el[propName] === null) return
+    if(propName === 'tabIndex' && el[propName] === -1) return
 
     // Special case: style
     // .style is a DOMStyleDeclaration, thus we need to iterate over all
