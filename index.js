@@ -94,6 +94,13 @@ function getElementProperties(el) {
       return
     }
 
+    // https://msdn.microsoft.com/en-us/library/cc848861%28v=vs.85%29.aspx
+    // The img element does not support the HREF content attribute.
+    // In addition, the href property is read-only for the img Document Object Model (DOM) object
+    if (el.tagName.toLowerCase() === 'img' && propName === 'href') {
+      return;
+    }
+
     // Special case: dataset
     // we can iterate over .dataset with a simple for..in loop.
     // The all-time foo with data-* attribs is the dash-snake to camelCase
