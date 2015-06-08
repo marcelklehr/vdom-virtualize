@@ -90,18 +90,20 @@ function getElementProperties(el) {
     // we can iterate over .dataset with a simple for..in loop.
     // The all-time foo with data-* attribs is the dash-snake to camelCase
     // conversion.
-    // However, I'm not sure if this is compatible with h()
+    //
+    // *This is compatible with h(), but not with every browser, thus this section was removed in favor
+    // of attributes (specified below)!*
     //
     // .dataset properties are directly accessible as transparent getters/setters, so
     // patching with vdom is possible.
-    if("dataset" == propName) {
+    /*if("dataset" == propName) {
       var data = {}
       for(var p in el.dataset) {
         data[p] = el.dataset[p]
       }
       obj[propName] = data
       return
-    }
+    }*/
 
     // Special case: attributes
     // these are a NamedNodeMap, but we can just convert them to a hash for vdom,
