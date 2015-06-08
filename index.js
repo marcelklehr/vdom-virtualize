@@ -66,6 +66,8 @@ function getElementProperties(el) {
   props.forEach(function(propName) {
     if(!el[propName]) return
 
+    if(el[propName] instanceof Element) return
+
     // Special case: style
     // .style is a DOMStyleDeclaration, thus we need to iterate over all
     // rules to create a hash of applied css properties.
@@ -121,6 +123,7 @@ function getElementProperties(el) {
     // diffing virtualize dom will trigger error
     // ref: https://github.com/Matt-Esch/virtual-dom/issues/176
     if("contentEditable" == propName && el[propName] === 'inherit') return
+
     // default: just copy the property
     obj[propName] = el[propName]
     return
