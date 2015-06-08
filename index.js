@@ -97,15 +97,23 @@ function getElementProperties(el) {
       for(var p in el.dataset) {
         data[p] = el.dataset[p]
       }
-
       obj[propName] = data
       return
     }
 
     // Special case: attributes
-    // some properties are only accessible via .attributes, so
-    // that's what we'd do, if vdom-create-element could handle this.
-    if("attributes" == propName) return
+    // these are a NamedNodeMap, but we can just convert them to a hash for vdom,
+    // because of https://github.com/Matt-Esch/virtual-dom/blob/master/vdom/apply-properties.js#L57
+    if("attributes" == propName){
+      var atts = Array.prototype.slice.call(el[propName]);
+      var hash = atts.reduce(function(o,a){
+        var name = a.name;
+        if(obj[name]) return o;
+        o[name] = el.getAttribute(a.name);
+        return o;
+      },{});
+      return obj[propName] = hash;
+    }
     if("tabIndex" == propName && el.tabIndex === -1) return
 
     // Special case: contentEditable
@@ -113,7 +121,6 @@ function getElementProperties(el) {
     // diffing virtualize dom will trigger error
     // ref: https://github.com/Matt-Esch/virtual-dom/issues/176
     if("contentEditable" == propName && el[propName] === 'inherit') return
-
     // default: just copy the property
     obj[propName] = el[propName]
     return
