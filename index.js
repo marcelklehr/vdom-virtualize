@@ -77,9 +77,17 @@ function getElementProperties(el) {
     if("style" == propName) {
       var css = {}
         , styleProp
-      for(var i=0; i<el.style.length; i++) {
-        styleProp = el.style[i]
-        css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
+      if (el.style.length) {
+        for(var i=0; i<el.style.length; i++) {
+          styleProp = el.style[i]
+          css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
+        }
+      } else { // IE8
+        for (var styleProp in el.style) {
+          if (el.style[styleProp]) {
+            css[styleProp] = el.style[styleProp];
+          }
+        }
       }
 
       obj[propName] = css
