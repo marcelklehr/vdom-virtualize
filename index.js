@@ -37,8 +37,7 @@ function createVNode(domNode, key) {
 createVNode.fromHTML = function(html, key) {
   var domNode = document.createElement('div'); // create container
   domNode.innerHTML = html; // browser parses HTML into DOM tree
-  domNode = domNode.children[0] || domNode; // select first node in tree
-  return createVNode(domNode, key);
+  return createVNode(domNode.firstChild, key);
 };
 
 function createFromTextNode(tNode) {
