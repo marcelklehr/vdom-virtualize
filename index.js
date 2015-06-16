@@ -172,7 +172,7 @@ module.exports.properties = [
 ,"controls"
 ,"crossOrigin"
 ,"data"
-,"dataset"
+//,"dataset" removed since attributes handles data-attributes
 ,"defer"
 ,"dir"
 ,"download"
