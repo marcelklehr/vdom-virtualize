@@ -84,7 +84,7 @@ function getElementProperties(el) {
         }
       } else { // IE8
         for (var styleProp in el.style) {
-          if (el.style[styleProp]) {
+          if (el.style[styleProp] && el.style.hasOwnProperty(styleProp)) {
             css[styleProp] = el.style[styleProp];
           }
         }
