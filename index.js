@@ -23,6 +23,7 @@
 */
 var VNode = require("virtual-dom/vnode/vnode")
   , VText = require("virtual-dom/vnode/vtext")
+  , VComment = require("./vcomment")
 
 module.exports = createVNode
 
@@ -31,6 +32,7 @@ function createVNode(domNode, key) {
 
   if(domNode.nodeType == 1) return createFromElement(domNode, key)
   if(domNode.nodeType == 3) return createFromTextNode(domNode, key)
+  if(domNode.nodeType == 8) return createFromCommentNode(domNode, key)
   return
 }
 
@@ -59,6 +61,11 @@ createVNode.fromHTML = function(html, key) {
 
 function createFromTextNode(tNode) {
   return new VText(tNode.nodeValue)
+}
+
+
+function createFromCommentNode(cNode) {
+  return new VComment(cNode.nodeValue)
 }
 
 
