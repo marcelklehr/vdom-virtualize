@@ -1,5 +1,7 @@
 # vdom-virtualize
 
+**New in v1.0:** vdom-virtualize now supports comments and does now use peerDependencies to depend on virtual-dom.
+
 ## API
 
 ### virtualize(node:DOMNode)
