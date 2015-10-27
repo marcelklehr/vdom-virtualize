@@ -4,7 +4,7 @@
   "description": "Virtulize any DOM node and turn it into a virtual-dom node.",
   "main": "index.js",
   "peerDependencies": {
-    "virtual-dom": "2.0.1"
+    "virtual-dom": "2.x"
   },
   "devDependencies": {
     "virtual-dom": "2.0.1"
