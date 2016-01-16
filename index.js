@@ -98,7 +98,7 @@ function getElementProperties(el) {
     if("style" == propName) {
       var css = {}
         , styleProp
-      if (el.style.length) {
+      if (undefined !== typeof el.style.length) {
         for(var i=0; i<el.style.length; i++) {
           styleProp = el.style[i]
           css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
