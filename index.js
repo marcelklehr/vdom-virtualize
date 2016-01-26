@@ -150,7 +150,7 @@ function getElementProperties(el) {
       var hash = {}
       for(var k=0; k<atts.length; k++){
         var name = atts[k].name;
-        if(obj[name]) continue;
+        if(obj[name] || obj[attrBlacklist[name]]) continue;
         hash[name] = el.getAttribute(name);
       }
       obj[propName] = hash;
@@ -259,57 +259,7 @@ module.exports.properties = [
 , "attributes"
 ]
 
-var attrs =
-module.exports.attrs = [
- "allowFullScreen"
-,"allowTransparency"
-,"charSet"
-,"cols"
-,"contextMenu"
-,"dateTime"
-,"disabled"
-,"form"
-,"frameBorder"
-,"height"
-,"hidden"
-,"maxLength"
-,"role"
-,"rows"
-,"seamless"
-,"size"
-,"width"
-,"wmode"
-
-// SVG Properties
-,"cx"
-,"cy"
-,"d"
-,"dx"
-,"dy"
-,"fill"
-,"fx"
-,"fy"
-,"gradientTransform"
-,"gradientUnits"
-,"offset"
-,"points"
-,"r"
-,"rx"
-,"ry"
-,"spreadMethod"
-,"stopColor"
-,"stopOpacity"
-,"stroke"
-,"strokeLinecap"
-,"strokeWidth"
-,"textAnchor"
-,"transform"
-,"version"
-,"viewBox"
-,"x1"
-,"x2"
-,"x"
-,"y1"
-,"y2"
-,"y"
-]
+var attrBlacklist =
+module.exports.attrBlacklist = {
+  'class': 'className'
+}
