@@ -86,8 +86,9 @@ function createFromElement(el) {
 function getElementProperties(el) {
   var obj = {}
 
-  props.forEach(function(propName) {
-    if(!el[propName]) return
+  for(var i=0; i<props.length; i++) {
+    var propName = props[i]
+    if(!el[propName]) continue
 
     // Special case: style
     // .style is a DOMStyleDeclaration, thus we need to iterate over all
@@ -99,7 +100,7 @@ function getElementProperties(el) {
       var css = {}
         , styleProp
       if ('undefined' !== typeof el.style.length) {
-        for(var i=0; i<el.style.length; i++) {
+        for(var j=0; j<el.style.length; j++) {
           styleProp = el.style[i]
           css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
         }
@@ -112,14 +113,14 @@ function getElementProperties(el) {
       }
 
       if(Object.keys(css).length) obj[propName] = css
-      return
+      continue
     }
 
     // https://msdn.microsoft.com/en-us/library/cc848861%28v=vs.85%29.aspx
     // The img element does not support the HREF content attribute.
     // In addition, the href property is read-only for the img Document Object Model (DOM) object
     if (el.tagName.toLowerCase() === 'img' && propName === 'href') {
-      return;
+      continue;
     }
 
     // Special case: dataset
@@ -152,22 +153,22 @@ function getElementProperties(el) {
         o[name] = el.getAttribute(a.name);
         return o;
       },{});
-      return obj[propName] = hash;
+      obj[propName] = hash;
+      continue
     }
-    if("tabIndex" == propName && el.tabIndex === -1) return
+    if("tabIndex" == propName && el.tabIndex === -1) continue
 
     // Special case: contentEditable
     // browser use 'inherit' by default on all nodes, but does not allow setting it to ''
     // diffing virtualize dom will trigger error
     // ref: https://github.com/Matt-Esch/virtual-dom/issues/176
-    if("contentEditable" == propName && el[propName] === 'inherit') return
+    if("contentEditable" == propName && el[propName] === 'inherit') continue
 
-    if('object' === typeof el[propName]) return
+    if('object' === typeof el[propName]) continue
 
     // default: just copy the property
     obj[propName] = el[propName]
-    return
-  })
+  }
 
   return obj
 }
