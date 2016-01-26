@@ -147,12 +147,12 @@ function getElementProperties(el) {
     // because of https://github.com/Matt-Esch/virtual-dom/blob/master/vdom/apply-properties.js#L57
     if("attributes" == propName){
       var atts = Array.prototype.slice.call(el[propName]);
-      var hash = atts.reduce(function(o,a){
-        var name = a.name;
-        if(obj[name]) return o;
-        o[name] = el.getAttribute(a.name);
-        return o;
-      },{});
+      var hash = {}
+      for(var k=0; k<atts.length; k++){
+        var name = atts[k].name;
+        if(obj[name]) continue;
+        hash[name] = el.getAttribute(name);
+      }
       obj[propName] = hash;
       continue
     }
