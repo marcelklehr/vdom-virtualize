@@ -101,7 +101,7 @@ function getElementProperties(el) {
         , styleProp
       if ('undefined' !== typeof el.style.length) {
         for(var j=0; j<el.style.length; j++) {
-          styleProp = el.style[i]
+          styleProp = el.style[j]
           css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
         }
       } else { // IE8
