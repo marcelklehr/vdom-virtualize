@@ -1,6 +1,6 @@
 # vdom-virtualize
 
-[![Sauce Test Status](https://saucelabs.com/buildstatus/vdom-virtualize)](https://saucelabs.com/u/vdom-virtualize)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/vdom-virtualize.svg)](https://saucelabs.com/u/vdom-virtualize)
 
 **New in v2.0:** removed support for virtualize.fromHTML -- doing this right and supporting all platforms is a job for [another library](https://github.com/TimBeyer/html-to-vdom).
 
