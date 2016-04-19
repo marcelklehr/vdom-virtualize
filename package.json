@@ -8,10 +8,12 @@
     "virtual-dom": "2.x"
   },
   "devDependencies": {
-    "virtual-dom": "2.0.1"
+    "virtual-dom": "2.0.1",
+    "expect.js": "0.3.x",
+    "zuul": "3.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "zuul -- test/test.js"
   },
   "repository": {
     "type": "git",
