@@ -36,29 +36,6 @@ function createVNode(domNode, key) {
   return
 }
 
-createVNode.fromHTML = function(html, key) {
-  var rootNode = null;
-
-  try {
-    // Everything except iOS 7 Safari, IE 8/9, Andriod Browser 4.1/4.3
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(html, 'text/html');
-    rootNode = doc.documentElement;
-  } catch(e) {
-    // Old browsers
-    var ifr = document.createElement('iframe');
-    ifr.setAttribute('data-content', html);
-    ifr.src = 'javascript: window.frameElement.getAttribute("data-content");';
-    document.head.appendChild(ifr);
-    rootNode = ifr.contentDocument.documentElement;
-    setTimeout(function() {
-      ifr.remove(); // Garbage collection
-    }, 0);
-  }
-
-  return createVNode(rootNode, key);
-};
-
 function createFromTextNode(tNode) {
   return new VText(tNode.nodeValue)
 }
